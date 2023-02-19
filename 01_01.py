@@ -1,0 +1,6 @@
+input_string = input('Введите предложение: ')
+str_array = input_string.split(' ')
+input_string = input_string.replace(' ', '-')
+print(input_string)
+print('Способ2')
+print('-'.join(str_array))

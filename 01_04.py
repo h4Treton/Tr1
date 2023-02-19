@@ -1,0 +1,7 @@
+number_a = float(input('Введите число a: '))
+number_b = float(input('Введите число b: '))
+number_c = float(input('Введите число c: '))
+count_positive = int(number_a > 0) + int(number_b > 0) + int(number_c > 0)
+print('Количество положительных чисел: ' + str(count_positive))
+count_negative = int(number_a < 0) + int(number_b < 0) + int(number_c < 0)
+print('Количество отрицательных чисел: ' + str(count_negative))
