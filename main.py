@@ -2,6 +2,7 @@
 # while not str2.isdigit():
 #     str2 = input('Введите число: ')
 # print(str2)
+import random
 import string
 # n = int(input('Введите число: '))
 # max_number = 0
@@ -88,5 +89,8 @@ def bubble_sort (numbers):
     return numbers
 
 
-kk = [1, 5, 3, 9, 0, 8, -5, -2]
+kk = []
+for i in range(100):
+    kk.append(random.randint(-500, 500))
+print(kk)
 print(bubble_sort(kk))
