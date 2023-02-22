@@ -9,4 +9,3 @@ for i in range(n):
     email_dictionary[i]['name'] = name
     email_dictionary[i]['email'] = email
 print(email_dictionary)
-2
