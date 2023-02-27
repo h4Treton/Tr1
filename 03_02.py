@@ -8,7 +8,6 @@ mr_dict = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.
 def char_to_mr(input_string: str):
     mr_string = ''
     for ch in input_string:
-        print(ch)
         if mr_dict.get(ch) is not None:
             mr_string += mr_dict.get(ch)
             mr_string += ' '
@@ -18,3 +17,4 @@ def char_to_mr(input_string: str):
 
 
 print(char_to_mr('HELLO PYTHON 3'))
+print(char_to_mr('SOS'))
