@@ -2,7 +2,7 @@
 # while not str2.isdigit():
 #     str2 = input('Введите число: ')
 # print(str2)
-import string
+# import string
 # n = int(input('Введите число: '))
 # max_number = 0
 # if n < 10:
@@ -68,25 +68,94 @@ import string
 # print(bernam('LONDON', 'SYSTEM'))
 
 
-def bubble_sort (numbers):
-    k = 0
-    exit_i = False
-    while not exit_i:
-        k = 0
-        ee2 = False
-        while k < len(numbers) - 1:
-            if numbers[k] > numbers[k+1]:
-                uu = numbers[k]
-                numbers[k] = numbers[k+1]
-                numbers[k+1] = uu
-                ee2 = True
-                break
+# def bubble_sort (numbers):
+#     k = 0
+#     exit_i = False
+#     while not exit_i:
+#         k = 0
+#         ee2 = False
+#         while k < len(numbers) - 1:
+#             if numbers[k] > numbers[k+1]:
+#                 uu = numbers[k]
+#                 numbers[k] = numbers[k+1]
+#                 numbers[k+1] = uu
+#                 ee2 = True
+#                 break
+#             else:
+#                 k += 1
+#         if not ee2:
+#             exit_i = True
+#     return numbers
+#
+#
+# kk = [1, 5, 3, 9, 0, 8, -5, -2]
+# print(bubble_sort(kk))
+
+# class Rectangle:
+#
+#     def __init__(self, x1, y1, x2, y2):
+#         self.width = abs(x1 - x2)
+#         self.height = abs(y1 - y2)
+#
+#     def perimeter(self):
+#         return (self.width + self.height) * 2
+#
+#     def area(self):
+#         return self.width * self.height
+#
+#
+# rec1 = Rectangle(2, -2, 5, 5)
+# print(rec1.perimeter())
+# print(rec1.area())
+
+class Category:
+
+    categories = []
+
+    @classmethod
+    def add(cls, category_name: str):
+        if category_name not in cls.categories:
+            cls.categories.append(category_name)
+            return len(cls.categories) - 1
+        else:
+            raise ValueError
+
+    @classmethod
+    def get(cls, index: int):
+        if index < len(cls.categories):
+            return cls.categories[index]
+        else:
+            raise IndexError
+
+    @classmethod
+    def delete(cls, index: int):
+        if index < len(cls.categories):
+            del cls.categories[index]
+
+    @classmethod
+    def update(cls, index: int, new_category_name: str):
+        if index >= len(cls.categories):
+            if new_category_name not in cls.categories:
+                cls.categories.append(new_category_name)
             else:
-                k += 1
-        if not ee2:
-            exit_i = True
-    return numbers
+                raise ValueError
+        else:
+            cls.categories[index] = new_category_name
 
 
-kk = [1, 5, 3, 9, 0, 8, -5, -2]
-print(bubble_sort(kk))
+print(Category.categories)
+Category.add('Кот')
+Category.add('Пес')
+Category.add('Тюлень')
+print(Category.categories)
+# Category.add('Кот')
+print(Category.get(0))
+print(Category.get(1))
+Category.delete(1)
+print(Category.categories)
+Category.add('Слон')
+print(Category.categories)
+Category.update(2, 'Слониха')
+print(Category.categories)
+Category.update(5, 'Голубь')
+print(Category.categories)
