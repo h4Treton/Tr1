@@ -108,54 +108,108 @@
 # print(rec1.perimeter())
 # print(rec1.area())
 
-class Category:
-
-    categories = []
-
-    @classmethod
-    def add(cls, category_name: str):
-        if category_name not in cls.categories:
-            cls.categories.append(category_name)
-            return len(cls.categories) - 1
-        else:
-            raise ValueError
-
-    @classmethod
-    def get(cls, index: int):
-        if index < len(cls.categories):
-            return cls.categories[index]
-        else:
-            raise IndexError
-
-    @classmethod
-    def delete(cls, index: int):
-        if index < len(cls.categories):
-            del cls.categories[index]
-
-    @classmethod
-    def update(cls, index: int, new_category_name: str):
-        if index >= len(cls.categories):
-            if new_category_name not in cls.categories:
-                cls.categories.append(new_category_name)
-            else:
-                raise ValueError
-        else:
-            cls.categories[index] = new_category_name
-
-
-print(Category.categories)
-Category.add('Кот')
-Category.add('Пес')
-Category.add('Тюлень')
-print(Category.categories)
+# class Category:
+#
+#     categories = []
+#
+#     @classmethod
+#     def add(cls, category_name: str):
+#         if category_name not in cls.categories:
+#             cls.categories.append(category_name)
+#             return len(cls.categories) - 1
+#         else:
+#             raise ValueError
+#
+#     @classmethod
+#     def get(cls, index: int):
+#         if index < len(cls.categories):
+#             return cls.categories[index]
+#         else:
+#             raise IndexError
+#
+#     @classmethod
+#     def delete(cls, index: int):
+#         if index < len(cls.categories):
+#             del cls.categories[index]
+#
+#     @classmethod
+#     def update(cls, index: int, new_category_name: str):
+#         if index >= len(cls.categories):
+#             if new_category_name not in cls.categories:
+#                 cls.categories.append(new_category_name)
+#             else:
+#                 raise ValueError
+#         else:
+#             cls.categories[index] = new_category_name
+#
+#
+# print(Category.categories)
 # Category.add('Кот')
-print(Category.get(0))
-print(Category.get(1))
-Category.delete(1)
-print(Category.categories)
-Category.add('Слон')
-print(Category.categories)
-Category.update(2, 'Слониха')
-print(Category.categories)
-Category.update(5, 'Голубь ')
-print(Category.categories)
+# Category.add('Пес')
+# Category.add('Тюлень')
+# print(Category.categories)
+# # Category.add('Кот')
+# print(Category.get(0))
+# print(Category.get(1))
+# Category.delete(1)
+# print(Category.categories)
+# Category.add('Слон')
+# print(Category.categories)
+# Category.update(2, 'Слониха')
+# print(Category.categories)
+# Category.update(5, 'Голубь ')
+# print(Category.categories)
+
+# import string
+#
+# class RegisterForm:
+#
+#     def __init__(self, username: str, password: str):
+#         self.username = username
+#         self.password = password
+#
+#     def is_valid(self):
+#         f_upper = False
+#         f_digits = False
+#         for i in range(len(self.password)):
+#             if self.password[i] in string.ascii_uppercase:
+#                 f_upper = True
+#             if self.password[i] in string.digits:
+#                 f_digits = True
+#         if not isinstance(self.username, str) or not isinstance(self.password, str):
+#             return False
+#         elif len(self.username) < 2:
+#             return False
+#         elif len(self.password) < 8:
+#             return False
+#         elif self.password.find(self.username) != -1:
+#             return False
+#         elif not f_upper or not f_digits:
+#             return False
+#         return True
+#
+#
+# rf1 = RegisterForm('user1', 'user1password')
+# print(rf1.is_valid())
+
+from collections import Counter
+
+class Numbers:
+    def __init__(self, numbers_list: list[int]):
+        self.numbers_list = numbers_list
+
+    def average(self):
+        sum2 = 0
+        for el in self.numbers_list:
+            sum2 += el
+        return sum2/len(self.numbers_list)
+
+    def max_count(self):
+        max_count_list = Counter(self.numbers_list)
+        max_common = max_count_list.most_common(1)
+        max_common = [*filter(lambda x: self.numbers_list.count(x) == max_common, self.max_common)]
+        return sum(max_common)/len(max_common)
+
+
+num2 = Numbers([1, 2, 3, 4, 4, 3])
+print(num2.max_count())
