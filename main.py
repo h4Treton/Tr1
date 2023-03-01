@@ -192,24 +192,41 @@
 # rf1 = RegisterForm('user1', 'user1password')
 # print(rf1.is_valid())
 
-from collections import Counter
+# from collections import Counter
+#
+#
+# class Numbers:
+#     def __init__(self, numbers_list: list[int]):
+#         self.numbers_list = numbers_list
+#
+#     def average(self):
+#         sum2 = 0
+#         for el in self.numbers_list:
+#             sum2 += el
+#         return sum2/len(self.numbers_list)
+#
+#     def max_count(self):
+#         max_count_list = Counter(self.numbers_list)
+#         max_common = max_count_list.most_common(1)
+#         max_common = [*filter(lambda x: self.numbers_list.count(x) == max_common, self.max_common)]
+#         return sum(max_common)/len(max_common)
+#
+#
+# num2 = Numbers([1, 2, 3, 4, 4, 3])
+# print(num2.max_count())
+# from io import DEFAULT_BUFFER_SIZE
+#
+#
+# print(DEFAULT_BUFFER_SIZE)
+# file = open('input.txt', 'r', encoding='utf-8')
+#
+# # print(file.read())
+# # print(file.readline())
+# # print(file.readlines())
+# lines = [line.strip() for line in file if line.strip()]
+# print(lines)
+# text = 'Brevis, germanus mortems saepe promissio de azureus, secundus barcas.'
+# file = open('output.txt', 'w', encoding='utf-8')
+# file.write(text)
+# file.close()
 
-class Numbers:
-    def __init__(self, numbers_list: list[int]):
-        self.numbers_list = numbers_list
-
-    def average(self):
-        sum2 = 0
-        for el in self.numbers_list:
-            sum2 += el
-        return sum2/len(self.numbers_list)
-
-    def max_count(self):
-        max_count_list = Counter(self.numbers_list)
-        max_common = max_count_list.most_common(1)
-        max_common = [*filter(lambda x: self.numbers_list.count(x) == max_common, self.max_common)]
-        return sum(max_common)/len(max_common)
-
-
-num2 = Numbers([1, 2, 3, 4, 4, 3])
-print(num2.max_count())
