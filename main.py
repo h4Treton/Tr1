@@ -230,3 +230,14 @@
 # file.write(text)
 # file.close()
 
+# from openpyxl import load_workbook, Workbook
+#
+# wb: Workbook = load_workbook('ex.xlsx')
+# print(wb.sheetnames)
+# ws = wb.active
+# print(ws['A1'].value)
+
+import pandas as pd
+
+frame = pd.read_excel('ex.xlsx')
+print(frame)
