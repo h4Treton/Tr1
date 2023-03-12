@@ -49,11 +49,13 @@ class OrdersModel(BaseModel):
     status_id: int = Field(ge=0)
 
 
+# +
 class StatusesModel(BaseModel):
     id: int = Field(ge=0)
     name: str = Field(max_length=10)
 
 
+# +
 class UsersModel(BaseModel):
     id: int = Field(ge=0)
     name: str = Field(max_length=24)
@@ -114,16 +116,94 @@ def import_users_from_csv():
         for line in lreader:
             ldict['id'] = line[0]
             ldict['name'] = line[1]
-            v_statuses = StatusesModel(**ldict)
+            ldict['email'] = line[2]
+            v_statuses = UsersModel(**ldict)
             all_file.append(ldict)
             ldict = {}
     with Session(autoflush=False, bind=engine) as session:
         for i in range(len(all_file)):
             print(all_file[i])
-            db_statuses = Statuses(id=all_file[i]['id'], name=all_file[i]['name'])
-            session.add(db_statuses)
+            db_users = Users(id=all_file[i]['id'], name=all_file[i]['name'], email=all_file[i]['email'])
+            session.add(db_users)
             session.commit()
-            session.refresh(db_statuses)
+            session.refresh(db_users)
 
 
-import_statuses_from_csv()
+def import_orders_from_csv():
+    delimiter = ';'
+    engine = create_engine('postgresql://main:main@localhost:5432/test_db')
+    all_file = []
+    with open('orders.csv', 'r', encoding='utf-8') as file:
+        lreader = reader(file, delimiter=delimiter)
+        ldict = {}
+        for line in lreader:
+            ldict['id'] = line[0]
+            ldict['user_id'] = line[1]
+            ldict['status_id'] = line[2]
+            v_statuses = OrdersModel(**ldict)
+            all_file.append(ldict)
+            ldict = {}
+    with Session(autoflush=False, bind=engine) as session:
+        for i in range(len(all_file)):
+            print(all_file[i])
+            db_orders = Orders(id=all_file[i]['id'], user_id=all_file[i]['user_id'], status_id=all_file[i]['status_id'])
+            session.add(db_orders)
+            session.commit()
+            session.refresh(db_orders)
+# -----------------------------------------
+
+
+def export_statuses_to_csv():
+    delimiter = ';'
+    engine = create_engine('postgresql://main:main@localhost:5432/test_db')
+    all_file = []
+    with Session(autoflush=False, bind=engine) as session:
+        db_statuses = session.query(Statuses)
+        for db_status in db_statuses:
+            ldict = {}
+            ldict['id'] = db_status.id
+            ldict['name'] = db_status.name
+            all_file.append(ldict)
+    with open('statuses_ex.csv', 'w', encoding='utf-8') as file:
+        lwriter = writer(file, delimiter=';')
+        for i in range(len(all_file)):
+            lwriter.writerow([all_file[i]['id'], all_file[i]['name']])
+
+
+def export_users_to_csv():
+    delimiter = ';'
+    engine = create_engine('postgresql://main:main@localhost:5432/test_db')
+    all_file = []
+    with Session(autoflush=False, bind=engine) as session:
+        db_users = session.query(Users)
+        for db_user in db_users:
+            ldict = {}
+            ldict['id'] = db_user.id
+            ldict['name'] = db_user.name
+            ldict['email'] = db_user.email
+            all_file.append(ldict)
+    with open('users_ex.csv', 'w', encoding='utf-8') as file:
+        lwriter = writer(file, delimiter=';')
+        for i in range(len(all_file)):
+            lwriter.writerow([all_file[i]['id'], all_file[i]['name'], all_file[i]['email']])
+
+
+def export_orders_to_csv():
+    delimiter = ';'
+    engine = create_engine('postgresql://main:main@localhost:5432/test_db')
+    all_file = []
+    with Session(autoflush=False, bind=engine) as session:
+        db_orders = session.query(Orders)
+        for db_order in db_orders:
+            ldict = {}
+            ldict['id'] = db_order.id
+            ldict['user_id'] = db_order.user_id
+            ldict['status_id'] = db_order.status_id
+            all_file.append(ldict)
+    with open('orders_ex.csv', 'w', encoding='utf-8') as file:
+        lwriter = writer(file, delimiter=';')
+        for i in range(len(all_file)):
+            lwriter.writerow([all_file[i]['id'], all_file[i]['user_id'], all_file[i]['status_id']])
+
+
+export_orders_to_csv()
